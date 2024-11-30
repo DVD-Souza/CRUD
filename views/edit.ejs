@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Editar Registro</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+    <h1>Editar Registro</h1>
+    <form action="/update/<%= registration._id %>" method="POST">
+        <input type="text" placeholder="nome" name="nome" value="<%= registration.nome %>">
+        <input type="text" placeholder="função" name="funcao" value="<%= registration.funcao %>">
+        <button type="submit">Atualizar</button>
+    </form>
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+    <h1>Lista de Registros</h1>
+    <form action="/search" method="POST">
+        <input type="text" name="nome" placeholder="Nome do Funcionário">
+        <button type="submit">Buscar</button>
+    </form>
+    <ul class="register">
+        <% for(let i = 0; i < registrations.length; i++) { %>
+            <li class="register">
+                <a href="/get/<%= registrations[i]._id %>"><%= registrations[i].nome %></a>
+                <span>:</span>
+                <span><%= registrations[i].funcao %></span>
+                <a href="/edit/<%= registrations[i]._id %>">Editar</a>
+                <a href="/delete/<%= registrations[i]._id %>">Excluir</a>
+            </li>
+        <% } %>
+    </ul>
+    <a href="/create">Adicionar Novo Registro</a>
+</body>
+</html>

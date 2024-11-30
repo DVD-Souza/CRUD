@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Excluir Registro</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+    <h1>Excluir Registro</h1>
+    <p>Tem certeza que deseja excluir este registro?</p>
+    <p><%= registration.nome %> : <%= registration.funcao %></p>
+    <form action="/delete/<%= registration._id %>" method="POST">
+        <button type="submit">Excluir</button>
+    </form>
+</body>
+</html>
