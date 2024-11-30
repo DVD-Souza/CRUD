@@ -1,14 +1,16 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const { MongoClient, ObjectId } = require('mongodb'); // Adicionada a importação do ObjectId
+const methodOverride = require('method-override'); // Importação do method-override
+const { MongoClient, ObjectId } = require('mongodb');
 const path = require('path');
 const uri = 'mongodb+srv://<user>:<password>@cadfunc.yrw1k.mongodb.net/?retryWrites=true&w=majority&appName=CadFunc';
 
 const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static('public'));
+app.use(methodOverride('_method')); // Configuração do method-override
 app.set('view engine', 'ejs');
-app.set('views', path.join(__dirname, 'views')); // Configuração do caminho das views
+app.set('views', path.join(__dirname, 'views'));
 
 let db;
 
@@ -21,7 +23,7 @@ MongoClient.connect(uri)
   })
   .catch(err => console.log(err));
 
-// Read - Página de Listagem
+// Página de Listagem
 app.get('/', (req, res) => {
   db.collection('registrations').find().toArray()
     .then(results => {
@@ -32,7 +34,7 @@ app.get('/', (req, res) => {
     });
 });
 
-// Create - Página de Criação
+// Página de Criação
 app.get('/create', (req, res) => {
   res.render('create.ejs');
 });
@@ -48,7 +50,7 @@ app.post('/register', (req, res) => {
     });
 });
 
-// Update - Página de Edição
+// Página de Edição
 app.get('/edit/:id', (req, res) => {
   const id = new ObjectId(req.params.id);
   db.collection('registrations').findOne({ _id: id })
@@ -60,7 +62,8 @@ app.get('/edit/:id', (req, res) => {
     });
 });
 
-app.post('/update/:id', (req, res) => {
+// Atualização de Registro usando PUT
+app.put('/update/:id', (req, res) => {
   const id = new ObjectId(req.params.id);
   db.collection('registrations').updateOne({ _id: id }, { $set: req.body })
     .then(result => {
@@ -72,7 +75,7 @@ app.post('/update/:id', (req, res) => {
     });
 });
 
-// Delete - Página de Exclusão
+// Página de Exclusão
 app.get('/delete/:id', (req, res) => {
   const id = new ObjectId(req.params.id);
   db.collection('registrations').findOne({ _id: id })
@@ -84,7 +87,8 @@ app.get('/delete/:id', (req, res) => {
     });
 });
 
-app.post('/delete/:id', (req, res) => {
+// Exclusão de Registro usando DELETE
+app.delete('/delete/:id', (req, res) => {
   const id = new ObjectId(req.params.id);
   db.collection('registrations').deleteOne({ _id: id })
     .then(result => {
@@ -96,9 +100,9 @@ app.post('/delete/:id', (req, res) => {
     });
 });
 
-// Rota para buscar um funcionário específico pelo nome
-app.post('/search', (req, res) => {
-  const nome = req.body.nome;
+// Busca por nome usando GET
+app.get('/search', (req, res) => {
+  const nome = req.query.nome;
   db.collection('registrations').findOne({ nome: nome })
     .then(result => {
       if (result) {
