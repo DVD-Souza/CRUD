@@ -1,12 +1,14 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const methodOverride = require('method-override'); // Importação do method-override
+const app = express();
 const { MongoClient, ObjectId } = require('mongodb');
 const path = require('path');
 const uri = 'mongodb+srv://Test:xO0dptJ8gGPDP3BU@cadfunc.yrw1k.mongodb.net/?retryWrites=true&w=majority&appName=CadFunc';
 
-const app = express();
+
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 app.use(express.static('public'));
 app.use(methodOverride('_method')); // Configuração do method-override
 app.set('view engine', 'ejs');
@@ -63,7 +65,7 @@ app.get('/edit/:id', (req, res) => {
 });
 
 // Atualização de Registro usando PUT
-app.put('/update/:id', (req, res) => {
+app.post('/update/:id', (req, res) => {
   const id = new ObjectId(req.params.id);
   db.collection('registrations').updateOne({ _id: id }, { $set: req.body })
     .then(result => {
