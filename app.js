@@ -3,7 +3,7 @@ const bodyParser = require('body-parser');
 const methodOverride = require('method-override'); // Importação do method-override
 const { MongoClient, ObjectId } = require('mongodb');
 const path = require('path');
-const uri = 'mongodb+srv://<user>:<password>@cadfunc.yrw1k.mongodb.net/?retryWrites=true&w=majority&appName=CadFunc';
+const uri = 'mongodb+srv://Test:xO0dptJ8gGPDP3BU@cadfunc.yrw1k.mongodb.net/?retryWrites=true&w=majority&appName=CadFunc';
 
 const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));

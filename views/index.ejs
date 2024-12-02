@@ -2,26 +2,175 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Document</title>
-    <link rel="stylesheet" href="/css/styles.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Registros de Funcionários</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Global settings */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f9f9f9;
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+        }
+
+        /* Main container */
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Heading */
+        h1 {
+            text-align: center;
+            color: #007BFF;
+            margin-bottom: 30px;
+        }
+
+        /* Form styling */
+        .search-form {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .search-input {
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            margin-right: 10px;
+            width: 60%;
+        }
+
+        .search-button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .search-button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Register list styling */
+        .register {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .register-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .register-link {
+            font-weight: bold;
+            color: #007BFF;
+            text-decoration: none;
+        }
+
+        .register-link:hover {
+            text-decoration: underline;
+        }
+
+        .separator {
+            margin: 0 5px;
+        }
+
+        .register-function {
+            font-style: italic;
+            color: #555;
+        }
+
+        .edit-link, .delete-link {
+            color: #007BFF;
+            text-decoration: none;
+            margin-left: 10px;
+        }
+
+        .edit-link:hover, .delete-link:hover {
+            text-decoration: underline;
+        }
+
+        /* Add new record link */
+        .add-link {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            font-size: 18px;
+            color: #007BFF;
+            text-decoration: none;
+        }
+
+        .add-link:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .search-form {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .search-input {
+                width: 80%;
+                margin-bottom: 10px;
+            }
+
+            .search-button {
+                width: 80%;
+            }
+
+            .register-item {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .add-link {
+                font-size: 16px;
+            }
+        }
+    </style>
 </head>
 <body>
-    <h1>Lista de Registros</h1>
-    <form action="/search" method="GET">
-        <input type="text" name="nome" placeholder="Nome do Funcionário">
-        <button type="submit">Buscar</button>
-    </form>
-    <ul class="register">
-        <% for(let i = 0; i < registrations.length; i++) { %>
-            <li class="register">
-                <a href="/get/<%= registrations[i]._id %>"><%= registrations[i].nome %></a>
-                <span>:</span>
-                <span><%= registrations[i].funcao %></span>
-                <a href="/edit/<%= registrations[i]._id %>">Editar</a>
-                <a href="/delete/<%= registrations[i]._id %>">Excluir</a>
-            </li>
-        <% } %>
-    </ul>
-    <a href="/create">Adicionar Novo Registro</a>
+    <div class="container">
+        <h1>Lista de Registros</h1>
+        <form action="/search" method="GET" class="search-form">
+            <input type="text" name="nome" placeholder="Nome do Funcionário" class="search-input">
+            <button type="submit" class="search-button">Buscar</button>
+        </form>
+        <ul class="register">
+            <% for(let i = 0; i < registrations.length; i++) { %>
+                <li class="register-item">
+                    <a href="/get/<%= registrations[i]._id %>" class="register-link"><%= registrations[i].nome %></a>
+                    <span class="separator">:</span>
+                    <span class="register-function"><%= registrations[i].funcao %></span>
+                    <a href="/edit/<%= registrations[i]._id %>" class="edit-link">Editar</a>
+                    <a href="/delete/<%= registrations[i]._id %>" class="delete-link">Excluir</a>
+                </li>
+            <% } %>
+        </ul>
+        <a href="/create" class="add-link">Adicionar Novo Registro</a>
+    </div>
 </body>
 </html>

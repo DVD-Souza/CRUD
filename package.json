@@ -11,6 +11,7 @@
   "description": "",
   "dependencies": {
     "body-parse": "^0.1.0",
+    "cadfunc": "file:",
     "ejs": "^3.1.10",
     "express": "^4.21.1",
     "method-override": "^3.0.0",
