@@ -2,8 +2,63 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Detalhes do Registro</title>
-    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        /* Reset básico para garantir consistência entre navegadores */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Corpo da página */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        /* Estilo do título principal */
+        h1 {
+            font-size: 2.5em;
+            color: #007BFF;
+            margin-bottom: 20px;
+        }
+
+        /* Estilo para os parágrafos */
+        p {
+            font-size: 1.2em;
+            margin: 10px 0;
+        }
+
+        /* Destaque para as labels (nome e função) */
+        strong {
+            color: #333;
+            font-weight: bold;
+        }
+
+        /* Link de volta à lista */
+        a {
+            display: inline-block;
+            margin-top: 20px;
+            font-size: 1.2em;
+            color: #007BFF;
+            text-decoration: none;
+            padding: 10px 15px;
+            border: 2px solid #007BFF;
+            border-radius: 5px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        /* Efeito ao passar o mouse sobre o link */
+        a:hover {
+            background-color: #007BFF;
+            color: #fff;
+        }
+    </style>
 </head>
 <body>
     <h1>Detalhes do Registro</h1>
@@ -12,3 +67,4 @@
     <a href="/">Voltar à lista</a>
 </body>
 </html>
+
